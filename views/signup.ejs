@@ -3,30 +3,48 @@
 <head>
     <title><%= title %></title>
     <link rel='stylesheet' href='/stylesheets/style.css' />
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 </head>
 <body>
-
+<div class="container">
 <form method="post" action="/">
-    <label>이름</label>
-    <input id="user_name" type="text"></input>
-    <label>E-mail</label>
-    <input id="user_mail" type="email"></input>
-    <label>PASSWORD</label>
-    <input id="user_password" type="password"></input>
-    <label>PASSWORD</label>
-    <input id="user_password_confirm" type="password"></input>
-    <label>생년원일</label>
-    <input id="user_birth" type="date"></input>
-    <label>성별</label>
-    <select id="user_gender">
-        <option>남</option>
-        <option>여</option>
-    </select>
-    <label>주관심사</label>
-    <input id="user_thing" type="text"></input>
-    <input type="submit" value="회원가입"/>
-</form>
+    <div class="form-group">
+        <label class="control-label col-sm-2" for="user_name">이름</label>
+        <input id="user_name" class="form-control" type="text">
+    </div>
+    <div class="form-group">
+        <label>E-mail</label>
+        <input id="user_mail" class="form-control" type="email">
+    </div>
+    <div class="form-group">
+        <label>PASSWORD</label>
+        <input id="user_password"class="form-control" type="password">
+    </div>
+    <div class="form-group">
+        <label>PASSWORD 확인</label>
+        <input id="user_password_confirm" class="form-control" type="password">
+    </div>
+    <div class="form-group">
+        <label>생년원일</label>
+        <input id="user_birth" type="date">
+    </div>
+    <div class="form-group">
+        <label>성별</label>
+        <select id="user_gender">
+            <option>남</option>
+            <option>여</option>
+        </select><br>
+    </div>
+    <div class="form-group">
+        <label>주관심사</label>
+        <input id="user_thing" type="text">
+    </div>
 
+    <input type="submit" value="회원가입" class="btn btn-default"/>
+</form>
+</div>
 
 </body>
 </html>

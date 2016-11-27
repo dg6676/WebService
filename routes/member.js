@@ -9,9 +9,9 @@ var router = express.Router();
 router.get('/:menu?', function(req, res, next) {
     var menu = req.params.menu;
     if(menu == 'login'){
-
+        res.render('login', { title: 'Express' });
     }else if(menu == 'join'){
-
+        res.render('signup', { title: 'Express' });
     }else
         next();
 });
