@@ -15,8 +15,7 @@
             <a class="navbar-brand">발해</a>
         </div>
         <!--<p>To make the tabs toggleable, add the data-toggle="tab" attribute to each link. Then add a .tab-pane class with a unique ID for every tab and wrap them inside a div element with class .tab-content.</p>-->
-        <label for="search_question">문제 검색</label>
-        <input type="text" placeholder="문제 검색하기" id="search_question"/><input type="submit" value="검색"/>
+
         <ul class="nav nav-tabs">
             <li class="active"><a data-toggle="tab" href="#home">Home</a></li>
             <li><a data-toggle="tab" href="#menu1">연도별 문제</a></li>
@@ -29,7 +28,14 @@
         <div class="tab-content">
             <div id="home" class="tab-pane fade in active">
                 <h3>HOME</h3>
-                <p></p>
+                <div class="input-group">
+                    <span class="input-group-addon">검색</span>
+                    <!--<label for="search_question">문제 검색</label>-->
+                    <input type="text" class="form-control" placeholder="문제 검색하기" id="search_question"/>
+
+                </div>
+                <button type="submit" class="btn btn-default">검색</button>
+
             </div>
             <div id="menu1" class="tab-pane fade">
                 <h3>연도별 문제</h3>
