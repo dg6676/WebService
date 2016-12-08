@@ -17,10 +17,19 @@ router.get('/:menu?', function(req, res, next) {
 });
 
 router.get('/', function(req, res, next) {
-    res.render('index', { title: 'Express' });
+    res.redirect('/member/login');
 });
 
 router.post('/signup', function(req, res, next){
+    var name = req.body.user_name;
+    var id = req.body.user_id;
+    var email = req.body.user_mail;
+    var pwd = req.body.user_password;
+    if(pwd != req.body.user_password_comfirm){
+        //비밀번호와 확인이 같지 않을 때 경고?
+    }
+    var birth = req.body.user_birth;
+    var gender = req.body.user_gender;
 
 });
 

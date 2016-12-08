@@ -19,12 +19,13 @@ db.once('open', function(){
 mongoose.connect('mongodb://localhost/webService');
 
 
-exports.signup = function(usid, pass, user_email, birth, gen){
+exports.signup = function(user_name, usid, pass, user_email, birth, gen){
     var user = new User();
     user.userID = usid;
     user.password = pass;
     user.email = user_email;
     user.birth_date = birth;
+    user.name = user_name;
     user.gender = gen;
 
     user.save(function(err){
