@@ -6,7 +6,7 @@
 var express = require('express');
 var router = express.Router();
 var db = require('../public/scripts/dbAccess');
-var session = require('');
+var session = require('express-session');
 
 router.get('/:menu?', function(req, res, next) {
     var menu = req.params.menu;
@@ -39,13 +39,24 @@ router.post('/signup', function(req, res, next){
 router.post('/login', function(req, res, next){
     var id = req.body.user_name;
     var pwd = req.body.user_password;
-    db.getUserInfo(id, pwd, function(res){
-        if(res == undefined){
+    db.getUserInfo(id, pwd, function(result){
+        if(result == undefined || req.session.userInfo != undefined){
             res.redirect('/member/login');
         }else{
-            
+            req.session.userInfo = result;
+            res.redirect('/mypage');
         }
     });
+});
+
+router.get('/logout', function(req, res, next){
+   if(req.session.userInfo == undefined)
+       res.redirect('/member/login');
+   else{
+       req.session.destroy(function(err){
+           res.redirect('/');
+       });
+   }
 });
 
 module.exports = router;
