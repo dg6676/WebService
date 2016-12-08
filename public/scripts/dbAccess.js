@@ -37,9 +37,8 @@ exports.signup = function(user_name, usid, pass, user_email, birth, gen){
     });
 };
 
-exports.getUserInfo = function(uniq_id, callback){
-
-    User.findOne({userID: uniq_id}, function(err, us){
+exports.getUserInfo = function(uniq_id, pwd, callback){
+    User.findOne({userID: uniq_id, password: pwd}, function(err, us){
         if(err) {
             console.log(err);
         } else {

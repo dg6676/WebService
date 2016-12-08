@@ -6,7 +6,7 @@ var router = express.Router();
 var multer = require('multer');
 
 var storage = multer.diskStorage({
-    destination: './assets/question_image/',
+    destination: './public/images/question_image/',
     filename: function(req, file, cb){
         cb(null, file.originalname);
     }
@@ -43,10 +43,13 @@ router.get('/:menu?/:selected', function(req, res, next) {
         //오답률 높은 문제 출력
     }else if(menu == 'upload'){
         //upload 화면 렌더링
-    }else{
+    }else if(menu == 'description'){
+        //문제 상세 출력
+    } else {
         next();
     }
 });
+
 router.get('/',function(res, req, next){
     //err
 });

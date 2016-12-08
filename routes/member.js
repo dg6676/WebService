@@ -6,6 +6,7 @@
 var express = require('express');
 var router = express.Router();
 var db = require('../public/scripts/dbAccess');
+var session = require('');
 
 router.get('/:menu?', function(req, res, next) {
     var menu = req.params.menu;
@@ -31,11 +32,20 @@ router.post('/signup', function(req, res, next){
     }
     var birth = req.body.user_birth;
     var gender = req.body.user_gender;
-
+    db.signup(name, id, pwd, email, birth, gender);
+    res.redirect('/member/login');
 });
 
 router.post('/login', function(req, res, next){
-
+    var id = req.body.user_name;
+    var pwd = req.body.user_password;
+    db.getUserInfo(id, pwd, function(res){
+        if(res == undefined){
+            res.redirect('/member/login');
+        }else{
+            
+        }
+    });
 });
 
 module.exports = router;
