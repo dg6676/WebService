@@ -4,6 +4,7 @@
 var express = require('express');
 var router = express.Router();
 var multer = require('multer');
+var db = require('../public/scripts/dbAccess');
 
 var storage = multer.diskStorage({
     destination: './public/images/question_image/',
@@ -22,6 +23,9 @@ router.get('/:menu?/:selected', function(req, res, next) {
         var selectedYear = req.params.selected;
         if(selectedYear==null || selectedYear=="" || selectedYear==undefined)
         {
+            db.getAllQuestion(function(result){
+                res.render('main', {'questionList': result});
+            });
             //전체 리스트로 렌더링
         }else{
             var year_questionList = []; //해당 연도의 문제 리스트
@@ -32,6 +36,9 @@ router.get('/:menu?/:selected', function(req, res, next) {
         var selectedCategory = req.params.selected;
         if(selectedCategory==null || selectedCategory=="" || selectedCategory==undefined)
         {
+            db.getAllQuestion(function(result){
+                res.render('main', {'questionList': result});
+            });
             //전체 리스트로 렌더링
         }else{
             var category_questionList = []; //해당 유형의 문제 리스트

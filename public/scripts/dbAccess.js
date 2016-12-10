@@ -5,7 +5,8 @@ require('./user_schema');
 
 var mongoose = require('mongoose'),
     User = mongoose.model('User'),
-    Question = mongoose.model('Question');
+    Question = mongoose.model('Question'),
+    UserQuestion = mongoose.model('UserQuestion');
 
 
 var db = mongoose.connection;
@@ -72,7 +73,7 @@ exports.updateUserQuestion = function(uniq_id, q_id, callback){
             callback(us);
         }
     });
-};
+}; //수정 필요 -> collection 변경 및 오답이어서 추가 되었는 지 문제집에 추가해서 추가되었는 지 확인해서 isCorrect와 isSaved 구분 확인
 
 exports.getUserQuestion = function(uniq_id, callback){
     User.findOne({userID: uniq_id}, function(err, us){
@@ -84,7 +85,24 @@ exports.getUserQuestion = function(uniq_id, callback){
         }
     });
 
-};
+}; //수정 필요 -> collection 변경 및 문제집으로 추가 된 문제만 불러온다
+
+exports.getUserIncorrectQuestion = function(user_id, callback){
+    UserQuestion.findOne({'userID': user_id}, function(err, docs){
+        var list = [];
+        if(err){
+            console.log(err);
+        }else{
+            var qList = docs.questionList;
+            for(var i = 0; i < qList.length; i++){
+                if(qList.isCorrect == false){
+                    list.push(qList[i].question);
+                }
+            }
+        }
+        callback(list);
+    });
+}; //사용자 오답 리스트
 
 exports.insertQuestion = function (qid, date, era, category, answer, score, incorrect, solved) {
     var question = new Question();
