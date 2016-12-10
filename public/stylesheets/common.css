@@ -1,0 +1,36 @@
+@CHARSET "UTF-8";
+
+*{
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: 'KoPub 돋움체 Medium', '맑은 고딕';
+}
+
+.title_box{
+    height: 30px;
+    margin: 0;
+    padding: 30px 50px 0px 7px;
+    background-color: #2790D9;
+    position: fixed;
+    z-index: 100;
+    min-width:1260px;
+    max-width: 1920px;
+}
+.footer{
+    width:100%;	height:50px;
+/*    size:fixed;*/
+    margin:0;
+    padding:20px 0px 10px 0px;
+    background-color:#F4F4F4;
+    position:relative;
+}
+
+.letter{
+    font-size:12px;
+    font-weight:bold;
+    color:#7C7475;
+    text-align:center;
+}

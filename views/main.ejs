@@ -68,20 +68,18 @@
             </div>
             <div id="menu4" class="tab-pane fade">
                 <h3>오답률 높은 문제</h3>
-<!--                <div class="list-group">
-                    <a href="#" class="list-group-item active">First item</a>
-                    <a href="#" class="list-group-item">Second item</a>
-                    <a href="#" class="list-group-item">Third item</a>
-                </div>-->
             </div>
             <div id="menu5" class="tab-pane fade">
                 <h3>문제 등록하기 </h3>
                 <div>
-                    <input type="text" placeholder="제목"/>
-                    <input type="file" style="margin: 0 auto; text-align: center;" name="uploadFile" accept="image/*"/>
-                    <input type="text" placeholder="정답"/></br>
-                    <input type="text" placeholder="태그" /></br>
-                    <input type="submit" value="등록">
+                    <form class="create_question" action="" method="post">
+                        <input type="text" placeholder="제목"/>
+                        <input type="file" style="margin: 0 auto; text-align: center;" name="uploadFile" accept="image/*"/>
+                        <input type="text" placeholder="정답"/></br>
+                        <input type="text" placeholder="태그" /></br>
+                        <input type="submit" value="등록">
+                    </form>
+
                 </div>
             </div>
             <div id="menu6" class="tab-pane fade">

@@ -11,9 +11,9 @@ var session = require('express-session');
 router.get('/:menu?', function(req, res, next) {
     var menu = req.params.menu;
     if(menu == 'login'){
-        res.render('login');
+        res.render('login',{title:'발해'});
     }else if(menu == 'join'){
-        res.render('signup');
+        res.render('join');
     }else
         next();
 });

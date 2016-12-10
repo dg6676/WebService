@@ -1,0 +1,160 @@
+
+a{
+    text-decoration: none;
+    color: black;
+}
+#topMenu {
+    margin:0px auto;
+    width:958px;
+}
+#topMenuLeft {
+    float:left;
+}
+#topMenuRight {
+    float:right;
+}
+header{
+    margin:0px auto;
+    background-color:#2790D9;
+    color:white;
+    padding-bottom:40px;
+
+}
+div#box{
+    background: #F2F2F2;
+    margin:0 auto;
+    width: 50%;
+}
+div#search{
+    margin-top: 5%;
+    padding: 5px;
+    border: 1px solid gray;
+    display: inline-block;
+    width: 100%;
+    background-color: white;
+    margin-bottom:1%;
+}
+div#search_head{
+    display: block;
+    margin: 0 auto;
+}
+div.panel-default{
+    padding-top: 0;
+    display: inline-block;
+}
+div#score_best{
+    width:210px;
+    background-color: white;
+}
+div#customize_best{
+    width:210px;
+    background-color: white;
+}
+table#schedule_list{
+    border-collapse: collapse;
+    width: 100%;
+    height: 90%;
+    font-size: 4px;
+}
+table#schedule_list td {
+
+}
+table#result_list,th{
+
+}
+table#result_list2,th{
+
+}
+div#custom_head{
+    padding-top: 8px;
+    padding-left: 11px;
+    padding-right: 12px;
+    padding-bottom: 0.5px;
+    color: white;
+    background-color: #2790D9;
+}
+div#score_head{
+    padding-top: 8px;
+    padding-left: 11px;
+    padding-right: 14px;
+    padding-bottom: 0.5px;
+    color: white;
+    background-color: #2790D9;
+}
+div#left_serch{
+    width:50%;
+    float:left;
+    height: 80%
+}
+div#right_search{
+    width:50%;
+    float: right;
+    height: 80%;
+}
+div#search_button{
+    display: inline-block;
+    margin-left: 40%;
+}
+div.container{
+    height: 20px;
+}
+div#schedule_search{
+    height: 80%;
+}
+div#side{
+    margin-top: 3%;
+    margin-right: 16%;
+    float: right;
+    width: 8%;
+}
+div#result{
+    padding: 5px;
+    margin-top: 1%;
+    background-color: white;
+    display: inherit;
+    clear:both;
+    border: 1px solid gray;
+}
+table#result_list{
+    width:90%;
+    margin: 0 auto;
+    text-align: center;
+    padding-bottom: 5px;
+}
+table#result_list2{
+    width:90%;
+    margin: 0 auto;
+    text-align: center;
+    padding-bottom: 5px;
+    display: none;
+}
+table#result_list3{
+    width:90%;
+    margin: 0 auto;
+    text-align: center;
+    padding-bottom: 5px;
+    display: none;
+}
+table#result_list4{
+    width:90%;
+    margin: 0 auto;
+    text-align: center;
+    padding-bottom: 5px;
+    display: none;
+}
+table#result_list5{
+    width:90%;
+    margin: 0 auto;
+    text-align: center;
+    padding-bottom: 5px;
+    display: none;
+}
+body{
+    background: #F2F2F2;
+}
+.btn-group-lg>.btn, .btn-lg {
+    padding: 3px 6px;
+    font-size: 5px;
+    line-height: 1.3333333;
+    border-radius: 6px;
+}

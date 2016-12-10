@@ -1,24 +1,49 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title><%= title %></title>
-    <link rel='stylesheet' href='/stylesheets/style.css' />
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <title>::발해::</title>
+    <link href="/stylesheets/login.css" type="text/css" rel="stylesheet">
+    <link href="/stylesheets/common.css" type="text/css" rel="stylesheet">
 </head>
 <body>
-<div>
-    <h1>한국사 문제은행 서비스</h1>
-</div>
-<form action="" method="post">
-    <label>ID</label>
-    <input id="user_name" type="text"></input>
-    <label>PASSWORD</label>
-    <input id="user_password" type="password"></input>
-    <button>회원가입</button>
-    <button>로그인</button>
-</form>
+<div class="box">
+    <div class="title">
+        <img src="/images/logo_white.png"/>
+    </div>
+    <div class="input">
+        <div class="text_title">
+            LOGIN
+        </div>
+        <div class="input_box">
+            <input type="text" class="join_input error"
+                   style="ime-mode: active;" name="email" placeholder=" 아이디"
+                   onfocus="this.placeholder=''"
+                   onblur="this.placeholder=' 아이디'" value="">
+            <input type="password" class="join_input error"
+                   style="ime-mode: active;" id="password" name="password"
+                   placeholder=" 비밀번호" onfocus="this.placeholder=''"
+                   onblur="this.placeholder=' 비밀번호'">
+            <form action="slidertest.html">
+                <input type="submit" class="join_button" value="로그인">
+            </form>
 
+        </div>
+        <div class="btn_box">
+					<span class="btn1">
+						<a href="">
+							회원정보찾기
+						</a>
+					</span>
+            <span class="btn2">
+						<a href="join.html">
+							회원가입
+						</a>
+					</span>
+        </div>
+    </div>
+</div>
+<div>
+</div>
 </body>
 </html>
