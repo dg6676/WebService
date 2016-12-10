@@ -131,7 +131,6 @@ exports.insertQuestion = function (qid, date, era, category, answer, score) {
 };
 
 exports.getQuestion = function(qid, callback){
-
     Question.findOne({qid: qid}, function(err, us){
         if(err) {
             console.log(err);
@@ -142,7 +141,6 @@ exports.getQuestion = function(qid, callback){
 };
 
 exports.getAllQuestion = function(callback){
-
     Question.find().exec(list = function(err, qlist){
         if(err) {
             console.log(err);
@@ -161,9 +159,11 @@ exports.getIncorrectQuestion = function(callback){
             qlist.sort(function(a, b){
                 return a.incorrect_rate - b.incorrect_rate;
             });
+            qlist.reverse();
             for(var i = 0; i < qlist.length; i++){
                 if(qlist.incorrect_rate > 50)
-                    qList.push(qlist[i]);
+                    qList.push(qlist[i].qid);
+                else break;
             }
         }
         callback(qList);

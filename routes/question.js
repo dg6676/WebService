@@ -16,7 +16,7 @@ var storage = multer.diskStorage({
 var upload = multer({storage: storage});
 
 /* GET home page. */
-router.get('/:menu?/:selected', function(req, res, next) {
+router.get('/:menu?/:selected?', function(req, res, next) {
     var menu = req.params.menu;
     if(menu == 'year'){ //연도별 문제 출력 (/question/year/:selectedYear)
         var yearList = []; //db에 저장되어 있는 문제들의 연도 리스트
@@ -37,7 +37,7 @@ router.get('/:menu?/:selected', function(req, res, next) {
         if(selectedCategory==null || selectedCategory=="" || selectedCategory==undefined)
         {
             db.getAllQuestion(function(result){
-                res.render('main', {'questionList': result});
+                res.render('', {'questionList': result});
             });
             //전체 리스트로 렌더링
         }else{
@@ -47,10 +47,17 @@ router.get('/:menu?/:selected', function(req, res, next) {
     }else if(menu == 'incorrect'){ //오답률 높은 문제 출력
         var incorrectQuestions = []; //오답률이 높은 문제 리스트
         var incorrectLateList = []; //오답률 리스트
+        db.getIncorrectQuestion(function(result){
+            res.render('', {'questionList': result});
+        });
         //오답률 높은 문제 출력
     }else if(menu == 'upload'){
         //upload 화면 렌더링
     }else if(menu == 'description'){
+        var selectedQid = req.params.selected;
+        db.getQuestion(selectedQid, function(result){
+            res.render('', {'qid': result.qid, 'date': result.date, 'era': result.era, 'category': result.category, 'answer': result.answer, 'score': result.score, 'incorrect_rate': result.incorrect_rate, 'num_solved': num_solved});
+        });
         //문제 상세 출력
     } else {
         next();
@@ -62,6 +69,14 @@ router.get('/',function(res, req, next){
 });
 
 router.post('/upload', upload.single('uploadFile'), function(req, res, next){
+    var qid;
+    var date;
+    var era;
+    var categoty;
+    var answer;
+    var score;
+
+    db.insertQuestion(qid, date, era, categoty, answer, score);
     //db upload
     res.redirect('/upload');
 });
