@@ -69,12 +69,12 @@ router.get('/',function(res, req, next){
 });
 
 router.post('/upload', upload.single('uploadFile'), function(req, res, next){
-    var qid;
-    var date;
-    var era;
-    var categoty;
-    var answer;
-    var score;
+    var qid = req.body.qid;
+    var date = req.body.date;
+    var era = req.body.era;
+    var categoty = req.body.category.split(',');
+    var answer = req.body.answer;
+    var score = req.body.score;
 
     db.insertQuestion(qid, date, era, categoty, answer, score);
     //db upload

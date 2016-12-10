@@ -72,11 +72,14 @@
             <div id="menu5" class="tab-pane fade">
                 <h3>문제 등록하기 </h3>
                 <div>
-                    <form class="create_question" action="" method="post">
-                        <input type="text" placeholder="제목"/>
+                    <form class="create_question" action="/upload" method="post">
+                        <input type="text" placeholder="제목" name="qid"/>
+                        <input type="text" placeholder="정답" name="answer"/></br>
+                        <input type="text" placeholder="태그" name="category"/></br>
+                        <input type="text" placeholder="시대" name="era"/></br>
+                        <input type="text" placeholder="시험 날짜" name="date"/></br>
+                        <input type="text" placeholder="점수" name="score"/></br>
                         <input type="file" style="margin: 0 auto; text-align: center;" name="uploadFile" accept="image/*"/>
-                        <input type="text" placeholder="정답"/></br>
-                        <input type="text" placeholder="태그" /></br>
                         <input type="submit" value="등록">
                     </form>
 

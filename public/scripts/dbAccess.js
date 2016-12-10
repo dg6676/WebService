@@ -90,7 +90,6 @@ exports.getUserQuestion = function(uniq_id, callback){
         }
         callback(list);
     });
-
 }; //문제집으로 추가 된 문제만 불러온다
 
 exports.getUserIncorrectQuestion = function(user_id, callback){
@@ -171,3 +170,7 @@ exports.getIncorrectQuestion = function(callback){
 };//오답률 높은 문제
 
 //오답률 및 푼 사람 수 update
+
+//카테고리 별 문제
+
+//연도별 문제
