@@ -62,7 +62,12 @@ router.get('/',function(res, req, next){
 });
 
 router.post('/upload', upload.single('uploadFile'), function(req, res, next){
+    //db upload
     res.redirect('/upload');
+});
+
+router.post('/solve', function(req, res){
+    //오답률 update & 문제를 푼 사람 수 update
 });
 
 module.exports = router;

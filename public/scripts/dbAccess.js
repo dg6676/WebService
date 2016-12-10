@@ -76,13 +76,19 @@ exports.updateUserQuestion = function(uniq_id, q_id, callback){
 }; //수정 필요 -> collection 변경 및 오답이어서 추가 되었는 지 문제집에 추가해서 추가되었는 지 확인해서 isCorrect와 isSaved 구분 확인
 
 exports.getUserQuestion = function(uniq_id, callback){
-    User.findOne({userID: uniq_id}, function(err, us){
-        if(err) {
+    UserQuestion.findOne({'userID': uniq_id}, function(err, docs){
+        var list = [];
+        if(err){
             console.log(err);
-        } else {
-           // console.log(JSON.stringify((us)));
-            callback(us);
+        }else{
+            var qList = docs.questionList;
+            for(var i = 0; i < qList.length; i++){
+                if(qList.isSaved == false){
+                    list.push(qList[i].question);
+                }
+            }
         }
+        callback(list);
     });
 
 }; //수정 필요 -> collection 변경 및 문제집으로 추가 된 문제만 불러온다
@@ -104,7 +110,7 @@ exports.getUserIncorrectQuestion = function(user_id, callback){
     });
 }; //사용자 오답 리스트
 
-exports.insertQuestion = function (qid, date, era, category, answer, score, incorrect, solved) {
+exports.insertQuestion = function (qid, date, era, category, answer, score) {
     var question = new Question();
     question.qid = qid;
     question.date = date;
@@ -112,8 +118,8 @@ exports.insertQuestion = function (qid, date, era, category, answer, score, inco
     question.category = category;
     question.answer = answer;
     question.score = score;
-    question.incorrect_rate = incorrect;
-    question.num_solved= solved;
+    question.incorrect_rate = 0;
+    question.num_solved= 0;
 
     question.save(function(err){
         if(err) {
@@ -145,3 +151,23 @@ exports.getAllQuestion = function(callback){
         }
     });
 };
+
+exports.getIncorrectQuestion = function(callback){
+    Question.find().exec(list = function(err, qlist){
+        var qList = [];
+        if(err){
+            console.log(err);
+        }else{
+            qlist.sort(function(a, b){
+                return a.incorrect_rate - b.incorrect_rate;
+            });
+            for(var i = 0; i < qlist.length; i++){
+                if(qlist.incorrect_rate > 50)
+                    qList.push(qlist[i]);
+            }
+        }
+        callback(qList);
+    });
+};//오답률 높은 문제
+
+//오답률 및 푼 사람 수 update
