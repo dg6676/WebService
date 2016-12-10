@@ -91,7 +91,7 @@ exports.getUserQuestion = function(uniq_id, callback){
         callback(list);
     });
 
-}; //수정 필요 -> collection 변경 및 문제집으로 추가 된 문제만 불러온다
+}; //문제집으로 추가 된 문제만 불러온다
 
 exports.getUserIncorrectQuestion = function(user_id, callback){
     UserQuestion.findOne({'userID': user_id}, function(err, docs){
