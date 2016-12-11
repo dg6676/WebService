@@ -76,7 +76,7 @@ exports.updateUserQuestion = function(user_id, q_id, is_correct, is_saved, callb
         if(err) {
             console.log(err);
         } else {
-            UserQuestion.update({ userID: user_id }, { $push: {questionList: {question: us, isCorrect: is_correct, isSaved: is_saved }} }, function(err, output){
+            UserQuestion.update({ userID: user_id }, { $push: {questionList: [{question: us, isCorrect: is_correct, isSaved: is_saved }]} }, function(err, output){
                 if(err) console.log('database failure' );
 
                 if(!output.n) console.log('Question not found' );
