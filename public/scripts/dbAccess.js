@@ -49,9 +49,9 @@ exports.signup = function(usid, pass, user_name, user_email, birth, gen){
     });
 }; // 회원가입하는 함수.
 
-exports.getUserInfo = function(uniq_id, pwd, callback){
+exports.getUserInfo = function(uniq_id, callback){
 
-    User.findOne({userID: uniq_id, password: pwd}, function(err, us){
+    User.findOne({userID: uniq_id}, function(err, us){
         if(err) {
             console.log(err);
         } else {
@@ -76,7 +76,7 @@ exports.updateUserQuestion = function(user_id, q_id, is_correct, is_saved, callb
         if(err) {
             console.log(err);
         } else {
-            UserQuestion.update({ userID: user_id }, { $push: {questionList: [{question: us, isCorrect: is_correct, isSaved: is_saved }]} }, function(err, output){
+            UserQuestion.update({ userID: user_id }, { $push: {questionList: {question: us, isCorrect: is_correct, isSaved: is_saved }} }, function(err, output){
                 if(err) console.log('database failure' );
 
                 if(!output.n) console.log('Question not found' );
@@ -95,7 +95,7 @@ exports.getUserQuestion = function(uniq_id, callback){
         }else{
             var qList = docs.questionList;
             for(var i = 0; i < qList.length; i++){
-                if(qList.isSaved == true){
+                if(qList.isSaved == false){
                     list.push(qList[i].question);
                 }
             }
@@ -123,7 +123,7 @@ exports.getUserIncorrectQuestion = function(user_id, callback){
 }; //사용자 오답 리스트
 
 
-exports.insertQuestion = function (qid, date, era, category, answer, score) {
+exports.insertQuestion = function (qid, date, era, category, answer, score, incorrect, solved) {
     var question = new Question();
     question.qid = qid;
     question.date = date;
@@ -131,8 +131,8 @@ exports.insertQuestion = function (qid, date, era, category, answer, score) {
     question.category = category;
     question.answer = answer;
     question.score = score;
-    question.incorrect_rate = 0;
-    question.num_solved= 0;
+    question.incorrect_rate = incorrect;
+    question.num_solved= solved;
 
     question.save(function(err){
         if(err) {
@@ -213,6 +213,7 @@ exports.updateQuestionState = function(q_id, inc, callback){
 
                 }
             });
+
             callback(us);
         }
     });
