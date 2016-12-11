@@ -16,7 +16,7 @@ var storage = multer.diskStorage({
 var upload = multer({storage: storage});
 
 router.get('/', function(req, res, next){
-    res.render('upload');
+    res.render('upload', {title: 'upload question'});
 });
 
 router.post('/', upload.single('uploadFile'), function(req, res, next){
