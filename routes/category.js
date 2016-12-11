@@ -11,7 +11,7 @@ router.get('/:selected?', function(req, res, next){
     if(category != undefined){
         db.getList('category', function (list) {
             db.getSelectedQuestion(category, function(result){
-                res.render('', {cList: list, qList: result});
+                res.render('category_question', {cList: list, qList: result});
             });
         });
     }else next();
@@ -20,7 +20,7 @@ router.get('/:selected?', function(req, res, next){
 router.get('/', function (req, res) {
     db.getList('category', function(list){
         db.getAllQuestion(function(result){
-            res.render('main', {'cList': list, 'questionList': result});
+            res.render('category_question', {'cList': list, 'questionList': result});
         });
     });
 });
