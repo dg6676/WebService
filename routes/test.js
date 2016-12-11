@@ -28,4 +28,7 @@ router.get('/solve',function(req,res){
     res.render('solve_question');
 });
 
+router.get('/mypage',function (req,res) {
+   res.render('mypage');
+});
 module.exports = router;

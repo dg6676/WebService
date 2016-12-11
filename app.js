@@ -16,7 +16,7 @@ var year = require('./routes/year');
 var category = require('./routes/category');
 var era = require('./routes/era');
 var recom = require('./routes/recommend');
-var temp_page=require('./routes/testing');
+var temp_page=require('./routes/test');
 var app = express();
 
 // view engine setup

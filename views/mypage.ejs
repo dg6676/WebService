@@ -1,0 +1,117 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <style>
+
+    </style>
+    <title>::발해::</title>
+    <link rel='stylesheet' href='/stylesheets/style.css' />
+    <link href="/stylesheets/common.css" type="text/css" rel="stylesheet">
+    <link href="/stylesheets/main.css" type="text/css" rel="stylesheet">
+    <link href="/stylesheets/myinfo.css" type="text/css" rel="stylesheet">
+</head>
+<body style="background-color: #F2F2F2;">
+<header>
+    <div id="topMenuRight">
+        <a href="#">media@ajou.ac.kr</a>
+    </div>
+    <div id="topMenu">
+        <div id="topMenuLeft">
+            <a href="/"><img src="/images/logo_white.png" style="width: 100px; height: 50px;"/></a>
+            <a href="/year" class="main_tab">회차 별 문제</a>&nbsp/&nbsp&nbsp&nbsp
+            <a href="/era" class="main_tab">시대 별 문제</a>&nbsp/&nbsp&nbsp&nbsp
+            <a href="/category" class="main_tab">카테고리 별 문제</a>&nbsp/&nbsp&nbsp&nbsp
+            <a href="/recommend/incorrect" class="main_tab">오답률 높은 문제</a>&nbsp/&nbsp&nbsp&nbsp
+            <a href="/upload" class="main_tab">문제 올리기</a>&nbsp/&nbsp&nbsp&nbsp
+            <a href="/mypage" class="main_tab">마이페이지</a>&nbsp/&nbsp&nbsp&nbsp
+        </div>
+
+    </div>
+
+</header>
+<div class="contain" style="height: 350px;">
+    <div class="tabs">
+				<span class="tab1">
+					<a href="/mypage" style="color:black;">
+						정보수정
+					</a>
+				</span>
+        <span>
+				|
+				</span>
+        <span class="tab2" >
+					<a href="" style="color:black;">
+						내 문제집
+					</a>
+				</span>
+        <span >
+				|
+				</span>
+        <span class="tab3" >
+					<a href="" style="color:black;">
+						문제 추천
+					</a>
+		</span>
+    </div>
+    <hr style="border-color: rgba(255, 255, 255, 0.5); border-width: 1px 0px 0px 0px;"/>
+
+    <div style="margin-top: 20px;">
+        <div class="left">
+            <div>
+                <div class="label2">
+                    <span>아이디<br/></span><span>(이메일)</span>
+                </div>
+                <span>
+							<input type="text" class="join_input" readonly
+                                   placeholder=" media@ajou.ac.kr">
+						</span>
+            </div>
+            <div>
+                <div class="label">
+                    <span>비밀번호</span>
+                </div>
+                <span>
+							<input type="password" class="join_input"	style="ime-mode: active;"
+                                   onfocus="this.placeholder=''"
+                                   placeholder=" 비밀번호 입력"
+                                   onblur="this.placeholder='비밀번호 입력'">
+						</span>
+            </div>
+            <div>
+                <div class="label2" style="margin-top: 4px;">
+                    <span>비밀번호<br/></span><span>재확인</span>
+                </div>
+                <span>
+							<input type="password" class="join_input"	style="ime-mode: active;"
+                                   onfocus="this.placeholder=''">
+						</span>
+            </div>
+            <div>
+                <div class="label">
+                    닉네임
+                </div>
+                <span>
+							<input type="text" class="join_input"	style="ime-mode: active;"
+                                   onfocus="this.placeholder=''"
+                                   placeholder="홍길동"
+                                   onblur="this.placeholder=' 이름입력.'">
+						</span>
+            </div>
+            <div style="height: 36px;">
+                <div class="label">
+                    성별
+                </div>
+                <div class="chk_box">
+                    <input type="radio" name="chk_info" checked>남자
+                    <input type="radio" name="chk_info" style="margin-left: 30px;">여자
+                </div>
+            </div>
+        </div>
+
+        <div style="text-align: center;">
+            <input type="button" class="submit" value="저장">
+        </div>
+    </div>
+</div>
+</body>
+</html>
