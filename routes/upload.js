@@ -16,18 +16,18 @@ var storage = multer.diskStorage({
 var upload = multer({storage: storage});
 
 router.get('/', function(req, res, next){
-    res.render('upload');
+    res.render('upload', {title: 'upload question'});
 });
 
 router.post('/', upload.single('uploadFile'), function(req, res, next){
     var qid = req.body.qid;
     var date = req.body.date;
     var era = req.body.era;
-    var categoty = req.body.category.split(',');
+    var category = req.body.category.split(',');
     var answer = req.body.answer;
     var score = req.body.score;
 
-    db.insertQuestion(qid, date, era, categoty, answer, score);
+    db.insertQuestion(qid, date, era, category, answer, score);
     //db upload
     res.redirect('/upload');
 });

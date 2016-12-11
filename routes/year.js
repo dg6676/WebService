@@ -11,7 +11,7 @@ router.get('/:selected?', function(req, res, next){
     if(year != undefined){
         db.getList('year', function(list){
             db.getSelectedQuestion(year, function(result){
-                res.render('', {yList: list, qList: result});
+                res.render('ininig_question', {title: 'year', yList: list, qList: result});
             });
         });
     }else next();
@@ -20,7 +20,7 @@ router.get('/:selected?', function(req, res, next){
 router.get('/', function (req, res) {
     db.getList('year', function(list){
         db.getAllQuestion(function(result){
-            res.render('', {yList: list, 'questionList': result});
+            res.render('ininig_question', {title: 'year', yList: list, 'questionList': result});
         });
     });
 });
