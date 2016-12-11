@@ -11,6 +11,11 @@ var users = require('./routes/users');
 var member = require('./routes/member');
 var myPage = require('./routes/myPage');
 var question = require('./routes/question');
+var upload = require('./routes/upload');
+var year = require('./routes/year');
+var category = require('./routes/category');
+var era = require('./routes/era');
+var recom = require('./routes/recommend');
 
 var app = express();
 
@@ -37,6 +42,11 @@ app.use('/users', users);
 app.use('/member', member);
 app.use('/mypage', myPage);
 app.use('/question', question);
+app.use('/upload', upload);
+app.use('/year', year);
+app.use('/category', category);
+app.use('/era', era);
+app.use('/recommend', recom);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
