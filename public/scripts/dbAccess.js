@@ -188,7 +188,6 @@ exports.updateQuestionState = function(q_id, callback){
 
                 }
             });
-
             callback(us);
         }
     });
