@@ -175,12 +175,24 @@ exports.getSortedIncorrect = function(callback){
     });
 }; // 전체 문제에서 오답률 가장 높은 문제 출력하는 함수.
 
-exports.updateQuestionState = function(q_id, callback){
+exports.getSortedNum = function(callback){
+
+    Question.find().sort('-num_solved').exec(function(err, qlist){
+        if(err) {
+            console.log(err);
+        } else{
+            callback(qlist);
+        }
+    });
+};//전체 문제에서 푼 사람 수가 높은 문제 출력
+
+exports.updateQuestionState = function(q_id, inc, callback){
     Question.findOne({qid: q_id}, function(err, us){
         if(err) {
             console.log(err);
         } else {
-            us.incorrect_rate++;
+            if(inc)
+                us.incorrect_rate++;
             us.num_solved++;
             us.save(function(err){
                 if(err) {

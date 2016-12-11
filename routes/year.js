@@ -9,15 +9,19 @@ var db = require('../public/scripts/dbAccess');
 router.get('/:selected?', function(req, res, next){
    var year = req.params.selected;
     if(year != undefined){
-        db.getSelectedQuestion(year, function(result){
-            res.render('', {qList: result});
+        db.getList('year', function(list){
+            db.getSelectedQuestion(year, function(result){
+                res.render('', {yList: list, qList: result});
+            });
         });
     }else next();
 });
 
 router.get('/', function (req, res) {
-    db.getAllQuestion(function(result){
-        res.render('main', {'questionList': result});
+    db.getList('year', function(list){
+        db.getAllQuestion(function(result){
+            res.render('main', {yList: list, 'questionList': result});
+        });
     });
 });
 
