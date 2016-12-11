@@ -156,10 +156,14 @@ exports.getQuestion = function(qid, callback){
 exports.getAllQuestion = function(callback){
 
     Question.find().exec(function(err, qlist){
+        var list = [];
         if(err) {
             console.log(err);
         } else{
-            callback(qlist);
+            for(var i = 0; i < qlist.length; i++){
+                list.push(qlist[i].qid);
+            }
+            callback(list);
         }
     });
 }; // 모든 문제 가져오는 함수.
@@ -170,7 +174,11 @@ exports.getSortedIncorrect = function(callback){
         if(err) {
             console.log(err);
         } else{
-            callback(qlist);
+            var list = [];
+            for(var i = 0; i < qlist.length; i++){
+                list.push(qlist[i].qid);
+            }
+            callback(list);
         }
     });
 }; // 전체 문제에서 오답률 가장 높은 문제 출력하는 함수.
@@ -181,7 +189,11 @@ exports.getSortedNum = function(callback){
         if(err) {
             console.log(err);
         } else{
-            callback(qlist);
+            var list = [];
+            for(var i = 0; i < qlist.length; i++){
+                list.push(qlist[i].qid);
+            }
+            callback(list);
         }
     });
 };//전체 문제에서 푼 사람 수가 높은 문제 출력
@@ -214,7 +226,11 @@ exports.getSelectedQuestion = function(tag, callback){
         if(err) {
             console.log(err);
         } else{
-            callback(qlist);
+            var list = [];
+            for(var i = 0; i < qlist.length; i++){
+                list.push(qlist[i].qid);
+            }
+            callback(list);
         }
     });
 }; //카테고리 별 문제. tag에 시대, 카테고리, 날짜 셋 중 하나 넣으면 그에 맞는 문제 전부 출력해주는 함수.
