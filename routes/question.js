@@ -4,6 +4,7 @@
 var express = require('express');
 var router = express.Router();
 var multer = require('multer');
+var db = require('../public/scripts/dbAccess');
 
 var storage = multer.diskStorage({
     destination: './public/images/question_image/',
@@ -15,13 +16,16 @@ var storage = multer.diskStorage({
 var upload = multer({storage: storage});
 
 /* GET home page. */
-router.get('/:menu?/:selected', function(req, res, next) {
+router.get('/:menu?/:selected?', function(req, res, next) {
     var menu = req.params.menu;
     if(menu == 'year'){ //연도별 문제 출력 (/question/year/:selectedYear)
         var yearList = []; //db에 저장되어 있는 문제들의 연도 리스트
         var selectedYear = req.params.selected;
         if(selectedYear==null || selectedYear=="" || selectedYear==undefined)
         {
+            db.getAllQuestion(function(result){
+                res.render('main', {'questionList': result});
+            });
             //전체 리스트로 렌더링
         }else{
             var year_questionList = []; //해당 연도의 문제 리스트
@@ -32,6 +36,9 @@ router.get('/:menu?/:selected', function(req, res, next) {
         var selectedCategory = req.params.selected;
         if(selectedCategory==null || selectedCategory=="" || selectedCategory==undefined)
         {
+            db.getAllQuestion(function(result){
+                res.render('', {'questionList': result});
+            });
             //전체 리스트로 렌더링
         }else{
             var category_questionList = []; //해당 유형의 문제 리스트
@@ -40,10 +47,17 @@ router.get('/:menu?/:selected', function(req, res, next) {
     }else if(menu == 'incorrect'){ //오답률 높은 문제 출력
         var incorrectQuestions = []; //오답률이 높은 문제 리스트
         var incorrectLateList = []; //오답률 리스트
+        db.getIncorrectQuestion(function(result){
+            res.render('', {'questionList': result});
+        });
         //오답률 높은 문제 출력
     }else if(menu == 'upload'){
         //upload 화면 렌더링
     }else if(menu == 'description'){
+        var selectedQid = req.params.selected;
+        db.getQuestion(selectedQid, function(result){
+            res.render('', {'qid': result.qid, 'date': result.date, 'era': result.era, 'category': result.category, 'answer': result.answer, 'score': result.score, 'incorrect_rate': result.incorrect_rate, 'num_solved': num_solved});
+        });
         //문제 상세 출력
     } else {
         next();
@@ -55,7 +69,20 @@ router.get('/',function(res, req, next){
 });
 
 router.post('/upload', upload.single('uploadFile'), function(req, res, next){
+    var qid = req.body.qid;
+    var date = req.body.date;
+    var era = req.body.era;
+    var categoty = req.body.category.split(',');
+    var answer = req.body.answer;
+    var score = req.body.score;
+
+    db.insertQuestion(qid, date, era, categoty, answer, score);
+    //db upload
     res.redirect('/upload');
+});
+
+router.post('/solve', function(req, res){
+    //오답률 update & 문제를 푼 사람 수 update
 });
 
 module.exports = router;

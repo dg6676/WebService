@@ -30,7 +30,7 @@ var UserQuestionSchema = new Schema({
     userID: String,
     questionList: [
         {
-            question: [QuestionSchema],
+            question: QuestionSchema,
             isCorrect: Boolean,
             isSaved: Boolean
         }
