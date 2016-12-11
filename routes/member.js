@@ -31,9 +31,7 @@ router.post('/signup', function(req, res, next){
         //비밀번호와 확인이 같지 않을 때 경고?
     }
     var birth = req.body.user_birth;
-    var gender = true;
-    if(req.body.user_gender == 'false')
-        gender = false;
+    var gender = req.body.user_gender;
     db.signup(name, id, pwd, email, birth, gender);
     res.redirect('/member/login');
 });
