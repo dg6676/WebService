@@ -8,19 +8,25 @@ var session = require('express-session');
 
 router.get('/:menu?', function(req, res, next){
     var menu = req.params.menu;
+    if(req.session.userInfo == undefined){
+        res.redirect('/member/login');
+    }
     if(menu == 'incorrect'){
         db.getUserIncorrectQuestion(req.session.userInfo.userID, function(list){
-            res.render('', {'title': 'user incorrect list', qList: list});
+            res.render('', {'title': 'user incorrect list', qList: list, l: 'logout'});
         });
     }else if(menu == 'myquestion'){
         db.getUserQuestion(req.session.userInfo.userID, function(list){
-            res.render('', {'title': 'user question', qList: list})
+            res.render('', {'title': 'user question', qList: list, l: 'logout'});
         });
     }else next();
 });
 
 router.get('/', function(req, res, next) {
-    res.render('myPage');
+    if(req.session.userInfo == undefined){
+        res.redirect('/member/login');
+    }
+    res.render('myPage', {l:'logout'});
 });
 
 router.post('/', function(req, res, next){

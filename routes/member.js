@@ -11,7 +11,10 @@ var session = require('express-session');
 router.get('/:menu?', function(req, res, next) {
     var menu = req.params.menu;
     if(menu == 'login'){
-        res.render('login',{title:'발해'});
+        if(req.session.userInfo != undefined)
+            res.redirect('/mypage');
+        else
+            res.render('login',{title:'발해'});
     }else if(menu == 'join'){
         res.render('join');
     }else
