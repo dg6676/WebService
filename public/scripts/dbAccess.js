@@ -88,7 +88,7 @@ exports.updateUserQuestion = function(user_id, q_id, is_correct, is_saved, callb
 }; // UserQuestion collection에서 해당 user_id 를 넣어서 찾고 거기에 특정 question을 추가하는 함수. 이게 틀렸는지 맞았는지 true, false로 넣고, 저장했는지 유무도 true, false로 넣음.
 
 exports.getUserQuestion = function(uniq_id, callback){
-    UserQuestion.findOne({'userID': uniq_id}, function(err, docs){
+    UserQuestion.findOne({userID: uniq_id}, function(err, docs){
         var list = [];
         if(err){
             console.log(err);
@@ -104,8 +104,9 @@ exports.getUserQuestion = function(uniq_id, callback){
     });
 }; //문제집으로 추가 된 문제만 불러온다.
 
+
 exports.getUserIncorrectQuestion = function(user_id, callback){
-    UserQuestion.findOne({'userID': user_id}, function(err, docs){
+    UserQuestion.findOne({userID: user_id}, function(err, docs){
         var list = [];
         if(err){
             console.log(err);
