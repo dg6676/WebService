@@ -31,4 +31,11 @@ router.get('/solve',function(req,res){
 router.get('/mypage',function (req,res) {
    res.render('mypage');
 });
+
+router.get('/mypage/myquestion',function (req,res) {
+    res.render('myquestion');
+});
+router.get('/mypage/incorrect',function (req,res) {
+    res.render('myincorrect');
+});
 module.exports = router;
