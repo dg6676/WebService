@@ -25,7 +25,7 @@ router.get('/', function(req, res, next) {
 router.post('/signup', function(req, res, next){
     var name = req.body.user_name;
     var id = req.body.user_id;
-    var email = req.body.user_name;
+    var email = name;
     var pwd = req.body.user_password;
     if(pwd != req.body.user_password_comfirm){
         //비밀번호와 확인이 같지 않을 때 경고?

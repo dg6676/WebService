@@ -48,9 +48,9 @@ exports.signup = function(usid, pass, user_name, user_email, birth, gen){
     });
 }; // 회원가입하는 함수.
 
-exports.getUserInfo = function(uniq_id, callback){
+exports.getUserInfo = function(uniq_id, pwd, callback){
 
-    User.findOne({userID: uniq_id}, function(err, us){
+    User.findOne({userID: uniq_id, password: pwd}, function(err, us){
         if(err) {
             console.log(err);
         } else {
