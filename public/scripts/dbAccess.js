@@ -20,14 +20,17 @@ db.once('open', function(){
 mongoose.connect('mongodb://localhost/webService');
 
 
-exports.signup = function(user_name, usid, pass, user_email, birth, gen){
+exports.signup = function(usid, pass, user_name, user_email, birth, gen){
     var user = new User();
+    var userquestion = new UserQuestion();
+
     user.userID = usid;
     user.password = pass;
+    user.name = user_name;
     user.email = user_email;
     user.birth_date = birth;
-    user.name = user_name;
     user.gender = gen;
+    userquestion.userID = usid;
 
     user.save(function(err){
         if(err) {
@@ -36,44 +39,53 @@ exports.signup = function(user_name, usid, pass, user_email, birth, gen){
             console.log(JSON.stringify(user));
         }
     });
-};
 
-exports.getUserInfo = function(uniq_id, pwd, callback){
-    User.findOne({userID: uniq_id, password: pwd}, function(err, us){
+    userquestion.save(function(err){
+        if(err) {
+            console.log(err);
+        } else {
+            console.log(JSON.stringify(userquestion));
+        }
+    });
+}; // 회원가입하는 함수.
+
+exports.getUserInfo = function(uniq_id, callback){
+
+    User.findOne({userID: uniq_id}, function(err, us){
         if(err) {
             console.log(err);
         } else {
             callback(us);
         }
     });
-};
+}; // 특정 유저 정보 가져오는 함수.
 
 exports.getAllUserInfo = function(callback){
 
-    User.find().exec(list = function(err, user){
+    User.find().exec(function(err, user){
         if(err) {
             console.log(err);
         } else{
             callback(user);
         }
     });
-};
+}; //모든 유저 정보 가져오는 함수.
 
-exports.updateUserQuestion = function(uniq_id, q_id, callback){
+exports.updateUserQuestion = function(user_id, q_id, is_correct, is_saved, callback){
     Question.findOne({qid: q_id}, function(err, us){
         if(err) {
             console.log(err);
         } else {
-            User.update({ userID: uniq_id }, { $push: {questionList: {question: us, isCorrect: false}} }, function(err, output){
+            UserQuestion.update({ userID: user_id }, { $push: {questionList: {question: us, isCorrect: is_saved, isSaved: is_saved }} }, function(err, output){
                 if(err) console.log('database failure' );
 
-                if(!output.n) console.log('book not found' );
+                if(!output.n) console.log('Question not found' );
 
             });
             callback(us);
         }
     });
-}; //수정 필요 -> collection 변경 및 오답이어서 추가 되었는 지 문제집에 추가해서 추가되었는 지 확인해서 isCorrect와 isSaved 구분 확인
+}; // UserQuestion collection에서 해당 user_id 를 넣어서 찾고 거기에 특정 question을 추가하는 함수. 이게 틀렸는지 맞았는지 true, false로 넣고, 저장했는지 유무도 true, false로 넣음.
 
 exports.getUserQuestion = function(uniq_id, callback){
     UserQuestion.findOne({'userID': uniq_id}, function(err, docs){
@@ -90,7 +102,7 @@ exports.getUserQuestion = function(uniq_id, callback){
         }
         callback(list);
     });
-}; //문제집으로 추가 된 문제만 불러온다
+}; //문제집으로 추가 된 문제만 불러온다.
 
 exports.getUserIncorrectQuestion = function(user_id, callback){
     UserQuestion.findOne({'userID': user_id}, function(err, docs){
@@ -109,7 +121,8 @@ exports.getUserIncorrectQuestion = function(user_id, callback){
     });
 }; //사용자 오답 리스트
 
-exports.insertQuestion = function (qid, date, era, category, answer, score) {
+
+exports.insertQuestion = function (qid, date, era, category, answer, score, incorrect, solved) {
     var question = new Question();
     question.qid = qid;
     question.date = date;
@@ -117,8 +130,8 @@ exports.insertQuestion = function (qid, date, era, category, answer, score) {
     question.category = category;
     question.answer = answer;
     question.score = score;
-    question.incorrect_rate = 0;
-    question.num_solved= 0;
+    question.incorrect_rate = incorrect;
+    question.num_solved= solved;
 
     question.save(function(err){
         if(err) {
@@ -127,9 +140,10 @@ exports.insertQuestion = function (qid, date, era, category, answer, score) {
             console.log(JSON.stringify(question));
         }
     });
-};
+}; //문제 collection에 문제 추가하는 함수.
 
 exports.getQuestion = function(qid, callback){
+
     Question.findOne({qid: qid}, function(err, us){
         if(err) {
             console.log(err);
@@ -137,42 +151,59 @@ exports.getQuestion = function(qid, callback){
             callback(us);
         }
     });
-};
+}; // 문제 id 입력하면 그 문제 정보만 가져오는 함수.
 
 exports.getAllQuestion = function(callback){
-    Question.find().exec(list = function(err, qlist){
+
+    Question.find().exec(function(err, qlist){
         if(err) {
             console.log(err);
         } else{
             callback(qlist);
         }
     });
-};
+}; // 모든 문제 가져오는 함수.
 
-exports.getIncorrectQuestion = function(callback){
-    Question.find().exec(list = function(err, qlist){
-        var qList = [];
-        if(err){
+exports.getSortedIncorrect = function(callback){
+
+    Question.find().sort('-incorrect_rate').exec(function(err, qlist){
+        if(err) {
             console.log(err);
-        }else{
-            qlist.sort(function(a, b){
-                return a.incorrect_rate - b.incorrect_rate;
-            });
-            qlist.reverse();
-            for(var i = 0; i < qlist.length; i++){
-                if(qlist.incorrect_rate > 50)
-                    qList.push(qlist[i].qid);
-                else break;
-            }
+        } else{
+            callback(qlist);
         }
-        callback(qList);
     });
-};//오답률 높은 문제
+}; // 전체 문제에서 오답률 가장 높은 문제 출력하는 함수.
 
-//오답률 및 푼 사람 수 update
+exports.updateQuestionState = function(q_id, callback){
+    Question.findOne({qid: q_id}, function(err, us){
+        if(err) {
+            console.log(err);
+        } else {
+            us.incorrect_rate++;
+            us.num_solved++;
+            us.save(function(err){
+                if(err) {
+                    console.log(err);
+                } else {
 
-//카테고리 별 문제
+                }
+            });
 
-//연도별 문제
+            callback(us);
+        }
+    });
+}; //오답률 및 푼 사람 수 update. 문제 id 넣으면 그문제 정보에 틀린 사람수, 푼 사람 수 +1 하는 함수.
 
-//시대별 문제
+
+
+exports.getSelectedQuestion = function(tag, callback){
+
+    Question.find( {$or: [ {era: tag}, {category: tag}, {date: tag}] }).exec(function(err, qlist){
+        if(err) {
+            console.log(err);
+        } else{
+            callback(qlist);
+        }
+    });
+}; //카테고리 별 문제. tag에 시대, 카테고리, 날짜 셋 중 하나 넣으면 그에 맞는 문제 전부 출력해주는 함수.
