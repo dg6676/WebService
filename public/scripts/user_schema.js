@@ -22,7 +22,7 @@ var UserSchema = new Schema({
     email: String,
     birth_date: String,
     gender: String
-}, {collection: 'Users'});
+}, {collection: 'users'});
 
 module.exports = mongoose.model('User', UserSchema);
 
@@ -35,7 +35,7 @@ var UserQuestionSchema = new Schema({
             isSaved: Boolean
         }
     ]
-}, {collection: 'UserQuestions'});
+}, {collection: 'user_question'});
 
 module.exports = mongoose.model('UserQuestion', UserQuestionSchema);
 

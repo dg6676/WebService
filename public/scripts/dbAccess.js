@@ -49,7 +49,6 @@ exports.getUserInfo = function(uniq_id, pwd, callback){
 };
 
 exports.getAllUserInfo = function(callback){
-
     User.find().exec(list = function(err, user){
         if(err) {
             console.log(err);
