@@ -9,15 +9,19 @@ var db = require('../public/scripts/dbAccess');
 router.get('/:selected?', function(req, res, next){
     var category = req.params.selected;
     if(category != undefined){
-        db.getSelectedQuestion(category, function(result){
-            res.render('', {qList: result});
+        db.getList('category', function (list) {
+            db.getSelectedQuestion(category, function(result){
+                res.render('', {cList: list, qList: result});
+            });
         });
     }else next();
 });
 
 router.get('/', function (req, res) {
-    db.getAllQuestion(function(result){
-        res.render('main', {'questionList': result});
+    db.getList('category', function(list){
+        db.getAllQuestion(function(result){
+            res.render('main', {'cList': list, 'questionList': result});
+        });
     });
 });
 

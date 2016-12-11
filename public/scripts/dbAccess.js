@@ -49,9 +49,9 @@ exports.signup = function(usid, pass, user_name, user_email, birth, gen){
     });
 }; // 회원가입하는 함수.
 
-exports.getUserInfo = function(uniq_id, callback){
+exports.getUserInfo = function(uniq_id, pwd, callback){
 
-    User.findOne({userID: uniq_id}, function(err, us){
+    User.findOne({userID: uniq_id, password: pwd}, function(err, us){
         if(err) {
             console.log(err);
         } else {
@@ -76,7 +76,7 @@ exports.updateUserQuestion = function(user_id, q_id, is_correct, is_saved, callb
         if(err) {
             console.log(err);
         } else {
-            UserQuestion.update({ userID: user_id }, { $push: {questionList: {question: us, isCorrect: is_saved, isSaved: is_saved }} }, function(err, output){
+            UserQuestion.update({ userID: user_id }, { $push: {questionList: {question: us, isCorrect: is_correct, isSaved: is_saved }} }, function(err, output){
                 if(err) console.log('database failure' );
 
                 if(!output.n) console.log('Question not found' );
@@ -88,14 +88,14 @@ exports.updateUserQuestion = function(user_id, q_id, is_correct, is_saved, callb
 }; // UserQuestion collection에서 해당 user_id 를 넣어서 찾고 거기에 특정 question을 추가하는 함수. 이게 틀렸는지 맞았는지 true, false로 넣고, 저장했는지 유무도 true, false로 넣음.
 
 exports.getUserQuestion = function(uniq_id, callback){
-    UserQuestion.findOne({'userID': uniq_id}, function(err, docs){
+    UserQuestion.findOne({userID: uniq_id}, function(err, docs){
         var list = [];
         if(err){
             console.log(err);
         }else{
             var qList = docs.questionList;
             for(var i = 0; i < qList.length; i++){
-                if(qList.isSaved == false){
+                if(qList.isSaved == true){
                     list.push(qList[i].question);
                 }
             }
@@ -104,8 +104,9 @@ exports.getUserQuestion = function(uniq_id, callback){
     });
 }; //문제집으로 추가 된 문제만 불러온다.
 
+
 exports.getUserIncorrectQuestion = function(user_id, callback){
-    UserQuestion.findOne({'userID': user_id}, function(err, docs){
+    UserQuestion.findOne({userID: user_id}, function(err, docs){
         var list = [];
         if(err){
             console.log(err);
@@ -122,7 +123,7 @@ exports.getUserIncorrectQuestion = function(user_id, callback){
 }; //사용자 오답 리스트
 
 
-exports.insertQuestion = function (qid, date, era, category, answer, score, incorrect, solved) {
+exports.insertQuestion = function (qid, date, era, category, answer, score) {
     var question = new Question();
     question.qid = qid;
     question.date = date;
@@ -130,8 +131,8 @@ exports.insertQuestion = function (qid, date, era, category, answer, score, inco
     question.category = category;
     question.answer = answer;
     question.score = score;
-    question.incorrect_rate = incorrect;
-    question.num_solved= solved;
+    question.incorrect_rate = 0;
+    question.num_solved= 0;
 
     question.save(function(err){
         if(err) {
@@ -143,7 +144,6 @@ exports.insertQuestion = function (qid, date, era, category, answer, score, inco
 }; //문제 collection에 문제 추가하는 함수.
 
 exports.getQuestion = function(qid, callback){
-
     Question.findOne({qid: qid}, function(err, us){
         if(err) {
             console.log(err);
@@ -175,12 +175,24 @@ exports.getSortedIncorrect = function(callback){
     });
 }; // 전체 문제에서 오답률 가장 높은 문제 출력하는 함수.
 
-exports.updateQuestionState = function(q_id, callback){
+exports.getSortedNum = function(callback){
+
+    Question.find().sort('-num_solved').exec(function(err, qlist){
+        if(err) {
+            console.log(err);
+        } else{
+            callback(qlist);
+        }
+    });
+};//전체 문제에서 푼 사람 수가 높은 문제 출력
+
+exports.updateQuestionState = function(q_id, inc, callback){
     Question.findOne({qid: q_id}, function(err, us){
         if(err) {
             console.log(err);
         } else {
-            us.incorrect_rate++;
+            if(inc)
+                us.incorrect_rate++;
             us.num_solved++;
             us.save(function(err){
                 if(err) {
@@ -189,7 +201,6 @@ exports.updateQuestionState = function(q_id, callback){
 
                 }
             });
-
             callback(us);
         }
     });

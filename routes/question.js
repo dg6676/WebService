@@ -28,11 +28,56 @@ router.get('/',function(res, req, next){
     //err
 });
 
-router.post('/solve/:qid', function(req, res){
-    db.updateQuestionState(req.params.qid, function (result) {
-        res.redirect('/question/description/'+req.params.qid);
+router.post('/solve/:qid/:wrong?', function(req, res){
+    var wrong = true;
+    if(req.params.wrong == 'false')
+        wrong = false;
+    db.updateQuestionState(req.params.qid, wrong, function () {
+        if(req.session.userInfo != undefined && wrong){
+            db.getUserQuestion(req.session.userInfo.userID, function(list){
+                var exist = false;
+                for(var i = 0; i < list.length; i++){
+                    if(list[i] == req.params.qid){
+                        exist = true;
+                        break;
+                    }
+                }
+                if(exist){
+                    db.updateUserQuestion(req.session.userInfo.userID, req.params.qid, 'false', 'true', function(){
+                        res.redirect('/question/description/'+req.params.qid);
+                    });
+                }else{
+                    db.updateUserQuestion(req.session.userInfo.userID, req.params.qid, 'false', 'false', function(){
+                        res.redirect('/question/description/'+req.params.qid);
+                    });
+                }
+            });
+        }else{
+            res.redirect('/question/description/'+req.params.qid);
+        }
     });
     //오답률 update & 문제를 푼 사람 수 update
+});
+
+router.post('/save/:qid', function(req, res){
+    db.getUserIncorrectQuestion(req.session.userInfo.userID, function (list) {
+        var exist = false;
+        for(var i = 0; i < list.length; i++){
+            if(list[i] == req.params.qid){
+                exist = true;
+                break;
+            }
+        }
+        if(exist){
+            db.updateUserQuestion(req.session.userInfo.userID, req.params.qid, 'false', 'true', function(){
+                res.redirect('/category');
+            });
+        }else{
+            db.updateUserQuestion(req.session.userInfo.userID, req.params.qid, 'true', 'true', function(){
+                res.redirect('/category');
+            });
+        }
+    });
 });
 
 module.exports = router;

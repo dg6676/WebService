@@ -14,6 +14,9 @@ router.get('/:menu?', function(req, res, next) {
         });
         //오답율 높은 문제
     } else if(menu == 'manySolve') {
+        db.getSortedNum(function(result){
+           res.render('', {qList: result});
+        });
         //많이 푼 문제
     }else{
         next();
