@@ -73,7 +73,7 @@
                 <td><%=qList[j].era%></td>
                 <td class="bold"><%=qList[j].incorrect_rate/qList[j].num_solved*100%></td>
                 <td><%=qList[j].date%></td>
-                <td><a href="/question/solve/<%=qid%>"  style="color:red;">다시 풀기</a></td>
+                <td><a href="/question/solve/<%=qList[j].qid%>"  style="color:red;">다시 풀기</a></td>
             </tr>
         <%}%>
     </table>

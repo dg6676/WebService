@@ -49,9 +49,9 @@ exports.signup = function(usid, pass, user_name, user_email, birth, gen){
     });
 }; // 회원가입하는 함수.
 
-exports.getUserInfo = function(uniq_id, callback){
+exports.getUserInfo = function(uniq_id, pwd, callback){
 
-    User.findOne({userID: uniq_id}, function(err, us){
+    User.findOne({userID: uniq_id, password: pwd}, function(err, us){
         if(err) {
             console.log(err);
         } else {
@@ -95,7 +95,7 @@ exports.getUserQuestion = function(uniq_id, callback){
         }else{
             var qList = docs.questionList;
             for(var i = 0; i < qList.length; i++){
-                if(qList.isSaved == false){
+                if(qList[i].isSaved == true){
                     list.push(qList[i].question);
                 }
             }
@@ -113,11 +113,12 @@ exports.getUserIncorrectQuestion = function(user_id, callback){
         }else{
             var qList = docs.questionList;
             for(var i = 0; i < qList.length; i++){
-                if(qList.isCorrect == false){
+                if(qList[i].isCorrect == false){
                     list.push(qList[i].question);
                 }
             }
         }
+        console.log(JSON.stringify(qList));
         callback(list);
     });
 }; //사용자 오답 리스트
