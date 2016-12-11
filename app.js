@@ -16,7 +16,7 @@ var year = require('./routes/year');
 var category = require('./routes/category');
 var era = require('./routes/era');
 var recom = require('./routes/recommend');
-
+var temp_page=require('./routes/testing');
 var app = express();
 
 // view engine setup
@@ -47,6 +47,8 @@ app.use('/year', year);
 app.use('/category', category);
 app.use('/era', era);
 app.use('/recommend', recom);
+app.use('/temp',temp_page);
+
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
