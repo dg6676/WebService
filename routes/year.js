@@ -12,7 +12,7 @@ router.get('/:selected?', function(req, res, next){
         login = 'logout';
     }
     if(year != undefined){
-        db.getList('year', function(list){
+        db.getList('date', function(list){
             db.getSelectedQuestion(year, function(result){
                 res.render('ininig_question', {title: 'year', yList: list, qList: result, l: login});
             });
@@ -25,9 +25,9 @@ router.get('/', function (req, res) {
     if(req.session.userInfo != undefined){
         login = 'logout';
     }
-    db.getList('year', function(list){
+    db.getList('date', function(list){
         db.getAllQuestion(function(result){
-            res.render('ininig_question', {title: 'year', yList: list, 'questionList': result, l: login});
+            res.render('ininig_question', {title: 'year', yList: list, qList: result, l: login});
         });
     });
 });

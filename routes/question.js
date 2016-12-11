@@ -15,13 +15,13 @@ router.get('/:menu?/:selected?', function(req, res, next) {
     var selectedQid = req.params.selected;
     if(menu == 'description'){
         db.getQuestion(selectedQid, function(result){
-            res.render('', {'title': 'question description', 'qid': result.qid, 'date': result.date, 'era': result.era, 'category': result.category, 'answer': result.answer, 'score': result.score, 'incorrect_rate': result.incorrect_rate, 'num_solved': num_solved, l: login});
+            res.render('', {'title': 'question description', 'qid': result.qid, 'date': result.date, 'era': result.era, 'category': result.category, 'answer': result.answer, 'score': result.score, 'incorrect_rate': result.incorrect_rate, 'num_solved': result.num_solved, l: login});
         });
         //문제 상세 출력
     } else if(menu == 'solve') {
         //문제 풀기 화면
         db.getQuestion(selectedQid, function(result){
-            res.render('solve_question', {'title': 'question solve','qid': result.qid, 'date': result.date, 'era': result.era, 'category': result.category, 'answer': result.answer, 'score': result.score, 'incorrect_rate': result.incorrect_rate, 'num_solved': num_solved, l: login});
+            res.render('solve_question', {'title': 'question solve','qid': result.qid, 'date': result.date, 'era': result.era, 'category': result.category, 'answer': result.answer, 'score': result.score, 'incorrect_rate': result.incorrect_rate, 'num_solved': result.num_solved, l: login});
         });
     }else{
         next();

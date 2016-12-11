@@ -5,6 +5,7 @@
     <link rel='stylesheet' href='/stylesheets/style.css' />
     <link href="/stylesheets/common.css" type="text/css" rel="stylesheet">
     <link href="/stylesheets/main.css" type="text/css" rel="stylesheet">
+    <script src="https://code.jquery.com/jquery-1.9.1.min.js"></script>
 </head>
 <body>
 
@@ -32,23 +33,31 @@
         <h1>회차별 문제 </h1>
         <div>
             <div>
-                <select style="width:40%;height:30%;" name="timeSelect">
-                    <option value="default">1회차</option>
-                    <option value="default">1회차</option>
+                <select style="width:40%;height:30%;" name="timeSelect" id="select">
+                    <% for(var i=0; i< yList.length;i++){ %>
+                        <option value="<%=yList[i]%>"><%=yList[i]%></option>
+                    <%}%>
                 </select>
             </div>
-            <button id="YearSearchButton" onclick="" style="width:100px; height:40px; color:white; background-color:#C3C3C3;">검색</button>
+            <button id="YearSearchButton" onclick="btnClick();" style="width:100px; height:40px; color:white; background-color:#C3C3C3;">검색</button>
         </div>
 
         <article>
             <div>
-                <% for(var i=0;;i++){ %>
-
+                <% for(var j=0; j < qList.length ;j++){ %>
+                    <a class="q" href="/question/solve/<%=qList[j]%>"><%=qList[j]%></a>
+                    <br>
                 <%}%>
             </div>
         </article>
 
     </section>
+    <script type="text/javascript">
+        function btnClick(){
+            var selected = $('#select').val();
+            location.href = '/year/'+selected;
+        }
+    </script>
 
 
 </body>
