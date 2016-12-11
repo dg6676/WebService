@@ -57,7 +57,7 @@ a, a:link, a:visited, a:hover, a:active {
     font-family: "koPub 돋움체 Bold";
 }
 
-.join_button{
+.login_button{
     width:245px; height:40px;
     margin:10px 0px 0px 0px;
     color:white;

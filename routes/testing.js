@@ -23,4 +23,8 @@ router.get('/era',function (req,res) {
 router.get('/upload',function(req,res){
     res.render('upload_question');
 });
+
+router.get('/solve',function(req,res){
+    res.render('solve_question');
+});
 module.exports = router;
