@@ -9,7 +9,9 @@ var db = require('../public/scripts/dbAccess');
 router.get('/:selected?', function(req, res, next){
    var year = req.params.selected;
     if(year != undefined){
-
+        db.getSelectedQuestion(year, function(result){
+            res.render('', {qList: result});
+        });
     }else next();
 });
 

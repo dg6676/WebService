@@ -9,6 +9,9 @@ var db = require('../public/scripts/dbAccess');
 router.get('/:menu?', function(req, res, next) {
     var menu = req.params.menu;
     if(menu == 'incorrect'){
+        db.getSortedIncorrect(function(result){
+           res.render('', {qList: result});
+        });
         //오답율 높은 문제
     } else if(menu == 'manySolve') {
         //많이 푼 문제

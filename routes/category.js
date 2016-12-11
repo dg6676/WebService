@@ -9,7 +9,9 @@ var db = require('../public/scripts/dbAccess');
 router.get('/:selected?', function(req, res, next){
     var category = req.params.selected;
     if(category != undefined){
-
+        db.getSelectedQuestion(category, function(result){
+            res.render('', {qList: result});
+        });
     }else next();
 });
 

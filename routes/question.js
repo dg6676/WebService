@@ -3,17 +3,7 @@
  */
 var express = require('express');
 var router = express.Router();
-var multer = require('multer');
 var db = require('../public/scripts/dbAccess');
-
-var storage = multer.diskStorage({
-    destination: './public/images/question_image/',
-    filename: function(req, file, cb){
-        cb(null, file.originalname);
-    }
-});
-
-var upload = multer({storage: storage});
 
 /* GET home page. */
 router.get('/:menu?/:selected?', function(req, res, next) {
@@ -38,7 +28,10 @@ router.get('/',function(res, req, next){
     //err
 });
 
-router.post('/solve', function(req, res){
+router.post('/solve/:qid', function(req, res){
+    db.updateQuestionState(req.params.qid, function (result) {
+        res.redirect('/question/description/'+req.params.qid);
+    });
     //오답률 update & 문제를 푼 사람 수 update
 });
 

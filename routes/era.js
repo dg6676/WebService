@@ -9,7 +9,9 @@ var db = require('../public/scripts/dbAccess');
 router.get('/:selected?', function(req, res, next){
     var era = req.params.selected;
     if(era != undefined){
-
+        db.getSelectedQuestion(era, function(result){
+            res.render('', {qList: result});
+        });
     }else next();
 });
 
