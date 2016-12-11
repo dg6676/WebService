@@ -13,11 +13,11 @@ router.get('/:menu?', function(req, res, next){
     }
     if(menu == 'incorrect'){
         db.getUserIncorrectQuestion(req.session.userInfo.userID, function(list){
-            res.render('', {'title': 'user incorrect list', qList: list, l: 'logout'});
+            res.render('myincorrect', {'title': 'user incorrect list', qList: list, l: 'logout'});
         });
     }else if(menu == 'myquestion'){
         db.getUserQuestion(req.session.userInfo.userID, function(list){
-            res.render('', {'title': 'user question', qList: list, l: 'logout'});
+            res.render('myquestion', {'title': 'user question', qList: list, l: 'logout'});
         });
     }else next();
 });
