@@ -17,9 +17,11 @@
         <div class="text_title">
             SIGN UP
         </div>
+
+        <form action="/member/signup" method="post">
         <div class="input_box">
             <div>
-                <form action="/member/signup" method="post">
+
                 <div class="label2">
                     <span>아이디</span><span>(이메일)</span>
                 </div>
@@ -83,19 +85,19 @@
                                    onfocus="this.placeholder=''"
                                    placeholder=" 8자 숫자의 조합"
                                    name="user_birth"
-                                   onblur="this.placeholder=' 2-8자 이상 글자와 숫자의 조합'">
+                                   onblur="this.placeholder=' 2-8자 이상 글자와 숫자의 조합'"/>
 						</span>
             </div>
 
             <div style="text-align:center; margin-top: 25px;">
 						<span style="float: left; margin-left:40px; margin-right:20px;">
-							<form action="/">
-							<input type="button"  class="cancel_button" value="취소" style="background-color: #C69B9B">
-                            </form>
+
+							<input type="button"  class="cancel_button" href="/member/login" value="취소" style="background-color: #C69B9B">
+
 						</span>
                 <span style="float : left">
 
-								<input type="submit"  style="float: right;" class="join_button" value="가입">
+								<input type="submit"  style="float: right;" class="join_button" value="가입"/>
 							</form>
 				</span>
             </div>
