@@ -3,8 +3,11 @@ var router = express.Router();
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
-  res.render('main_tab', { title: 'Express' });
-  console.log("hello index.js");
+  var login = 'login';
+  if(req.session.userInfo != undefined){
+    login = 'logout';
+  }
+  res.render('main_tab', { title: 'Express', l: login });
 });
 
 module.exports = router;
