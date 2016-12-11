@@ -26,7 +26,7 @@ router.post('/', upload.single('uploadFile'), function(req, res, next){
     var category = req.body.category.split(',');
     var answer = req.body.answer;
     var score = req.body.score;
-
+    console.log(req.file.originalname);
     db.insertQuestion(qid, date, era, category, answer, score);
     //db upload
     res.redirect('/upload');
