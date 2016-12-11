@@ -14,7 +14,7 @@ router.get('/:selected?', function(req, res, next){
     if(era != undefined){
         db.getList('era', function (list) {
             db.getSelectedQuestion(era, function(result){
-                res.render('period_question', {title: 'era', eList: list, qList: result, l:login});
+                res.render('period_question', {title: 'era', eList: list, qList: result, l:login, s:era});
             });
         });
     }else next();
@@ -27,7 +27,7 @@ router.get('/', function (req, res) {
     }
     db.getList('era', function(list){
         db.getAllQuestion(function(result){
-            res.render('period_question', {title: 'era', eList: list, 'questionList': result, l: login});
+            res.render('period_question', {title: 'era', eList: list, qList: result, l: login, s: list[0]});
         });
     });
 });
