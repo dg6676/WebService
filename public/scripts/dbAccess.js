@@ -144,7 +144,6 @@ exports.insertQuestion = function (qid, date, era, category, answer, score) {
 }; //문제 collection에 문제 추가하는 함수.
 
 exports.getQuestion = function(qid, callback){
-
     Question.findOne({qid: qid}, function(err, us){
         if(err) {
             console.log(err);
