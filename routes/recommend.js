@@ -16,7 +16,7 @@ router.get('/:menu?', function(req, res, next) {
            res.render('high_incorrect_rate', {title: 'high incorrect rate', qList: result, l: login});
         });
         //오답율 높은 문제
-    } else if(menu == 'manySolve') {
+    } else if(menu == 'manySolved') {
         db.getSortedNum(function(result){
            res.render('many_people_solved', {title: 'many people solved', qList: result, l: login});
         });

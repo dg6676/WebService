@@ -8,9 +8,6 @@ var session = require('express-session');
 
 router.get('/:menu?', function(req, res, next){
     var menu = req.params.menu;
-    if(req.session.userInfo == undefined){
-        res.redirect('/member/login');
-    }
     if(menu == 'incorrect'){
         db.getUserIncorrectQuestion(req.session.userInfo.userID, function(list){
             res.render('myincorrect', {'title': 'user incorrect list', qList: list, l: 'logout'});
@@ -25,8 +22,9 @@ router.get('/:menu?', function(req, res, next){
 router.get('/', function(req, res, next) {
     if(req.session.userInfo == undefined){
         res.redirect('/member/login');
+    }else{
+        res.render('myPage', {l:'logout'});
     }
-    res.render('myPage', {l:'logout'});
 });
 
 router.post('/', function(req, res, next){

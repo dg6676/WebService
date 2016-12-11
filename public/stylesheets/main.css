@@ -15,7 +15,7 @@ a{
 }
 #topMenu {
     margin:0 auto;
-    width:958px;
+    width:1058px;
     padding: 20px;
 }
 #topMenuLeft {
@@ -30,8 +30,13 @@ header{
     background-color:#2790D9;
     color:white;
     padding-bottom:40px;
-
 }
+
+#login{
+    right: 0;
+    float: right;
+}
+
 .save_button{
     width:245px; height:40px;
     margin:10px 0px 0px 0px;
@@ -41,5 +46,4 @@ header{
 
     font-family: "koPub 돋움체 Bold";
     font-size:15px;
-
 }
