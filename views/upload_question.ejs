@@ -1,7 +1,6 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title><%= title %></title>
     <link rel='stylesheet' href='/stylesheets/style.css' />
     <link href="/stylesheets/common.css" type="text/css" rel="stylesheet">
     <link href="/stylesheets/main.css" type="text/css" rel="stylesheet">
@@ -28,14 +27,21 @@
 </header>
 <section>
     <h3>문제 올리기</h3>
+
     <div>
         <div>
-            <select style="width:40%;height:30%;" name="timeSelect">
-                <option value="default">문화</option>
-                <option value="default">정치</option>
-            </select>
+            <form class="create_question" action="/upload" method="post">
+                <input type="text" placeholder="제목" name="qid"/></br>
+                <input type="text" placeholder="정답" name="answer"/></br>
+                <input type="text" placeholder="태그" name="category"/></br>
+                <input type="text" placeholder="시대" name="era"/></br>
+                <input type="text" placeholder="시험 날짜" name="date"/></br>
+                <input type="text" placeholder="점수" name="score"/></br>
+                <input type="file" style="margin: 0 auto; text-align: center;" name="uploadFile" accept="image/*"/></br>
+                <input type="submit" value="등록" style="width:100px; height:40px; color:white; background-color:#C3C3C3;">
+            </form>
         </div>
-        <button id="YearSearchButton" onclick="" style="width:100px; height:40px; color:white; background-color:#C3C3C3;">검색</button>
+
     </div>
 
     <article>

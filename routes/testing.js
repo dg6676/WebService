@@ -19,4 +19,8 @@ router.get('/category',function (req,res) {
 router.get('/era',function (req,res) {
     res.render('period_question',{'title':"발해"});
 });
+
+router.get('/upload',function(req,res){
+    res.render('upload_question');
+});
 module.exports = router;

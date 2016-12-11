@@ -20,7 +20,7 @@ router.get('/:selected?', function(req, res, next){
 router.get('/', function (req, res) {
     db.getList('year', function(list){
         db.getAllQuestion(function(result){
-            res.render('main', {yList: list, 'questionList': result});
+            res.render('', {yList: list, 'questionList': result});
         });
     });
 });
