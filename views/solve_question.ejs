@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <link rel='stylesheet' href='/stylesheets/style.css' />
+    <link href="/stylesheets/common.css" type="text/css" rel="stylesheet">
+    <link href="/stylesheets/main.css" type="text/css" rel="stylesheet">
+</head>
+<body>
+
+<header>
+    <div id="topMenuRight">
+        <a href="#">media@ajou.ac.kr</a>
+    </div>
+    <div id="topMenu">
+        <div id="topMenuLeft">
+            <a href="/" class="main_tab"><img src="/images/logo_white.png" style="width: 100px; height: 50px;"/></a>
+            <a href="/" class="main_tab">회차 별 문제</a>&nbsp/&nbsp&nbsp&nbsp
+            <a href="/" class="main_tab">시대 별 문제</a>&nbsp/&nbsp&nbsp&nbsp
+            <a href="/" class="main_tab">카테고리 별 문제</a>&nbsp/&nbsp&nbsp&nbsp
+            <a href="/" class="main_tab">오답률 높은 문제</a>&nbsp/&nbsp&nbsp&nbsp
+            <a href="/" class="main_tab">문제 올리기</a>&nbsp/&nbsp&nbsp&nbsp
+            <a href="/" class="main_tab">마이페이지</a>&nbsp/&nbsp&nbsp&nbsp
+        </div>
+
+    </div>
+
+</header>
+<section>
+    <h1>문제 풀기</h1>
+
+    <div>
+        <div>
+            <h2>문제가 들어갈 부분</h2>
+            <form class="create_question" action="/upload" method="post">
+                <input type="text" placeholder="정답" name="answer"/></br>
+                <input type="submit"class="save_button" value="등록" style="width:100px; height:40px; color:white; background-color:#C3C3C3;">
+            </form>
+        </div>
+
+    </div>
+
+    <article>
+        <p id="p">
+        </p>
+    </article>
+
+</section>
+
+
+</body>
+</html>

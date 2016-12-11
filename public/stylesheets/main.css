@@ -32,4 +32,14 @@ header{
     padding-bottom:40px;
 
 }
+.save_button{
+    width:245px; height:40px;
+    margin:10px 0px 0px 0px;
+    color:white;
+    background-color: #2790D9;
+    border:0px;
 
+    font-family: "koPub 돋움체 Bold";
+    font-size:15px;
+
+}
