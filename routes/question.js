@@ -33,10 +33,10 @@ router.get('/',function(res, req, next){
 });
 
 router.post('/solve/:qid', function(req, res){
-    var wrong = true;
+    var wrong = false;
     if(req.body.answer != req.body.real_answer)
-        wrong = false;
-    db.updateQuestionState(req.body.qid, !wrong, function () {
+        wrong = true;
+    db.updateQuestionState(req.body.qid, wrong, function () {
         if(req.session.userInfo != undefined && wrong){
             db.getUserQuestion(req.session.userInfo.userID, function(list){
                 var exist = false;
@@ -47,11 +47,12 @@ router.post('/solve/:qid', function(req, res){
                     }
                 }
                 if(exist){
-                    db.updateUserQuestion(req.session.userInfo.userID, req.params.qid, 'false', 'true', function(){
+                    console.log(req.session.userInfo.userID);
+                    db.updateUserQuestion(req.session.userInfo.userID, req.params.qid, false, true, function(){
                         res.redirect('/question/description/'+req.params.qid);
                     });
                 }else{
-                    db.updateUserQuestion(req.session.userInfo.userID, req.params.qid, 'false', 'false', function(){
+                    db.updateUserQuestion(req.session.userInfo.userID, req.params.qid, false, false, function(){
                         res.redirect('/question/description/'+req.params.qid);
                     });
                 }
@@ -75,11 +76,11 @@ router.post('/save/:qid', function(req, res){
             }
         }
         if(exist){
-            db.updateUserQuestion(req.session.userInfo.userID, req.params.qid, 'false', 'true', function(){
+            db.updateUserQuestion(req.session.userInfo.userID, req.params.qid, false, true, function(){
                 res.redirect('/category');
             });
         }else{
-            db.updateUserQuestion(req.session.userInfo.userID, req.params.qid, 'true', 'true', function(){
+            db.updateUserQuestion(req.session.userInfo.userID, req.params.qid, true, true, function(){
                 res.redirect('/category');
             });
         }

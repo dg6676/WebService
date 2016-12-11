@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>발해</title>
+    <link rel='stylesheet' href='/stylesheets/style.css' />
+    <link href="/stylesheets/common.css" type="text/css" rel="stylesheet">
+    <link href="/stylesheets/main.css" type="text/css" rel="stylesheet">
+    <script src="https://code.jquery.com/jquery-1.9.1.min.js"></script>
+</head>
+<body>
+
+<header>
+    <div id="topMenuRight">
+        <a href="#">media@ajou.ac.kr</a>
+    </div>
+    <div id="topMenu">
+        <div id="topMenuLeft">
+            <a href="/" class="main_tab"><img src="/images/logo_white.png" style="width: 100px; height: 50px;"/></a>
+            <a href="/year" class="main_tab">회차 별 문제</a>&nbsp/&nbsp&nbsp&nbsp
+            <a href="/era" class="main_tab">시대 별 문제</a>&nbsp/&nbsp&nbsp&nbsp
+            <a href="/category" class="main_tab">카테고리 별 문제</a>&nbsp/&nbsp&nbsp&nbsp
+            <a href="/recommend/incorrect" class="main_tab">오답률 높은 문제</a>&nbsp/&nbsp&nbsp&nbsp
+            <a href="/upload" class="main_tab">문제 올리기</a>&nbsp/&nbsp&nbsp&nbsp
+            <a href="/mypage" class="main_tab">마이페이지</a>&nbsp/&nbsp&nbsp&nbsp
+        </div>
+        <div id="">
+            <a href="/member/<%=l%>"><%=l%></a>
+        </div>
+    </div>
+
+</header>
+<section>
+    <h1>오답율 높은 문제 </h1>
+    <article>
+        <div>
+            <% for(var j=0; j < qList.length ;j++){ %>
+                <a class="q" href="/question/solve/<%=qList[j]%>"><%=qList[j]%></a>
+                <br>
+            <%}%>
+        </div>
+    </article>
+</section>
+
+
+</body>
+</html>
