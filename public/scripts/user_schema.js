@@ -37,5 +37,5 @@ var UserQuestionSchema = new Schema({
     ]
 }, {collection: 'UserQuestions'});
 
-module.exports = mongoose.model('UserQuestions', UserQuestionSchema);
+module.exports = mongoose.model('UserQuestion', UserQuestionSchema);
 
