@@ -3,7 +3,6 @@
  */
 var express = require('express');
 var router = express.Router();
-var multer = require('multer');
 var db = require('../public/scripts/dbAccess');
 
 router.get('/:menu?', function(req, res, next) {
