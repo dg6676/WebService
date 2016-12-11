@@ -25,20 +25,22 @@ router.get('/', function(req, res, next) {
 router.post('/signup', function(req, res, next){
     var name = req.body.user_name;
     var id = req.body.user_id;
-    var email = req.body.user_mail;
+    var email = req.body.user_name;
     var pwd = req.body.user_password;
     if(pwd != req.body.user_password_comfirm){
         //비밀번호와 확인이 같지 않을 때 경고?
     }
     var birth = req.body.user_birth;
-    var gender = req.body.user_gender;
+    var gender = true;
+    if(req.body.user_gender == 'false')
+        gender = false;
     db.signup(name, id, pwd, email, birth, gender);
     res.redirect('/member/login');
 });
 
 router.post('/login', function(req, res, next){
-    var id = req.body.user_name;
-    var pwd = req.body.user_password;
+    var id = req.body.email;
+    var pwd = req.body.password;
     db.getUserInfo(id, pwd, function(result){
         if(result == undefined || req.session.userInfo != undefined){
             res.redirect('/member/login');
