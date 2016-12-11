@@ -33,9 +33,11 @@
             <div>
                 <img src="/images/question_image/33_h_1.jpg"></img>
             </div>
-            <form class="create_question" action="/upload" method="post">
+            <form class="create_question" action="/question/solve" method="post">
                 <input type="text" placeholder="정답" name="answer"/></br>
-                <input type="submit"class="save_button" value="등록" style="width:100px; height:40px; color:white; background-color:#2790D9;">
+                <input type="hidden" value="<%=qid%>" name="qid">
+                <input type="hidden" value="<%=answer%>" name="real_answer">
+                <input type="submit" class="save_button" value="등록" style="width:100px; height:40px; color:white; background-color:#2790D9;">
             </form>
         </div>
 
