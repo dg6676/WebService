@@ -20,8 +20,6 @@ router.get('/:selected?', function(req, res, next){
 router.get('/', function (req, res) {
     db.getList('category', function(list){
         db.getAllQuestion(function(result){
-            console.log(JSON.stringify(list));
-            console.log(JSON.stringify(result));
             res.render('category_question', {title: 'category' ,cList: list, qList: result});
         });
     });
