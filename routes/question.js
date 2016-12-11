@@ -17,7 +17,7 @@ router.get('/:menu?/:selected?', function(req, res, next) {
     } else if(menu == 'solve') {
         //문제 풀기 화면
         db.getQuestion(selectedQid, function(result){
-            res.render('', {'title': 'question solve','qid': result.qid, 'date': result.date, 'era': result.era, 'category': result.category, 'answer': result.answer, 'score': result.score, 'incorrect_rate': result.incorrect_rate, 'num_solved': num_solved});
+            res.render('solve_question', {'title': 'question solve','qid': result.qid, 'date': result.date, 'era': result.era, 'category': result.category, 'answer': result.answer, 'score': result.score, 'incorrect_rate': result.incorrect_rate, 'num_solved': num_solved});
         });
     }else{
         next();
@@ -28,11 +28,11 @@ router.get('/',function(res, req, next){
     //err
 });
 
-router.post('/solve/:qid/:wrong?', function(req, res){
+router.post('/solve', function(req, res){
     var wrong = true;
-    if(req.params.wrong == 'false')
+    if(req.body.answer != req.body.real_answer)
         wrong = false;
-    db.updateQuestionState(req.params.qid, wrong, function () {
+    db.updateQuestionState(req.body.qid, wrong, function () {
         if(req.session.userInfo != undefined && wrong){
             db.getUserQuestion(req.session.userInfo.userID, function(list){
                 var exist = false;
