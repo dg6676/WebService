@@ -65,6 +65,7 @@
             <td class="trtr">오답율</td>
             <td class="trtr">날짜</td>
             <td class="trtr">문제 풀기</td>
+            <td class="trtr">문제 삭제</td>
         </tr>
         <% for(var j=0; j < qList.length ;j++){ %>
             <tr>
@@ -74,6 +75,7 @@
                 <td class="bold"><%=qList[j].incorrect_rate/qList[j].num_solved*100%></td>
                 <td><%=qList[j].date%></td>
                 <td><a href="/question/solve/<%=qList[j].qid%>"  style="color:red;">다시 풀기</a></td>
+                <td><a href="/mypage/deleteSaved/<%=qList[j].qid%>" style="color:red;">삭제</a></td>
             </tr>
         <%}%>
     </table>

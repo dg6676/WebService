@@ -6,6 +6,39 @@ var router = express.Router();
 var db = require('../public/scripts/dbAccess');
 var session = require('express-session');
 
+router.get('/:menu?/:qid?', function(req, res, next){
+    var m = req.params.menu;
+    if(m == 'deleteSaved'){
+        var qid = req.params.qid;
+        db.getUserIncorrectQuestion(req.session.userInfo.userID, function(list){
+            for(var i = 0; i < list.length; i++){
+                if(list[i].qid == qid){
+                    db.updateUserQuestion(req.session.userInfo.userID, qid, false, false, function(result){
+                        res.redirect('/mypage/myquestion');
+                    });
+                }
+            }
+            db.deleteUserQuestion(req.session.userInfo.userID, qid, function(){
+                res.redirect('/mypage/myquestion');
+            })
+        })
+    }else if(m == 'deleteIncorrect'){
+        var q_id = req.params.qid;
+        db.getUserQuestion(req.session.userInfo.userID, function(list){
+            for(var i = 0; i < list.length; i++){
+                if(list[i].qid == q_id){
+                    db.updateUserQuestion(req.session.userInfo.userID, q_id, true, true, function(result){
+                        res.redirect('/mypage/incorrect');
+                    });
+                }
+            }
+            db.deleteUserQuestion(req.session.userInfo.userID, q_id, function(){
+                res.redirect('/mypage/incorrect');
+            })
+        })
+    }else next();
+});
+
 router.get('/:menu?', function(req, res, next){
     var menu = req.params.menu;
     if(menu == 'incorrect'){

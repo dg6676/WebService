@@ -261,7 +261,7 @@ exports.getList = function(list_name, callback){
 
 
 exports.deleteUserQuestion = function(user_id, q_id, callback){
-            UserQuestion.update({ userID: user_id }, { $pull: {questionList: {question: { qid: q_id }}} }, function(err, output){
+            UserQuestion.findOneAndUpdate({ userID: user_id }, { $pull: {questionList: {question: { qid: q_id }}} }, function(err, output){
                 if(err) console.log('database failure' );
                 if(!output.n) console.log('Question not found' );
                 callback(output);
