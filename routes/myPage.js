@@ -27,7 +27,16 @@ router.get('/', function(req, res, next) {
     }
 });
 
-router.post('/', function(req, res, next){
+router.post('/modify', function(req, res, next){
+    var newPwd = req.body.pwd;
+    var newName = req.body.name;
+    var newGender = req.body.chk_info;
+    db.updateUserInfo(req.session.userInfo.userID, newPwd, newName, req.session.userInfo.userID, req.session.userInfo.birth_date, newGender, function (result) {
+        req.session.userInfo.password = newPwd;
+        req.session.userInfo.name = newName;
+        req.session.userInfo.gender = newGender;
+        res.redirect('/myPage');
+    });
    //회원 정보 수정
 });
 
