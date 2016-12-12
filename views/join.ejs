@@ -13,6 +13,9 @@
     <div class="title">
         <img src="/images/logo_white.png"/>
     </div>
+    <% if (msg != '') { %>
+        <div class="alert alert-danger"><%=msg%></div>
+    <%}%>
     <div class="input">
         <div class="text_title">
             SIGN UP

@@ -8,34 +8,13 @@ var express = require('express');
 var router = express.Router();
 var multer = require('multer');
 
-
-router.get('/',function (req,res) {
-    res.render('ininig_question',{'title':"발해"});
-});
-router.get('/category',function (req,res) {
-    res.render('category_question',{'title':"발해"});
+router.get('/', function(req, res){
+    req.flash('test', 'worked');
+    res.redirect('/temp/test');
 });
 
-router.get('/era',function (req,res) {
-    res.render('period_question',{'title':"발해"});
+router.get('/test', function (req, res) {
+   res.send('<script type="text/javascript">alert(JSON.stringify(req.flash("#{test}")))</script>');
 });
 
-router.get('/upload',function(req,res){
-    res.render('upload_question');
-});
-
-router.get('/solve',function(req,res){
-    res.render('solve_question');
-});
-
-router.get('/mypage',function (req,res) {
-   res.render('mypage');
-});
-
-router.get('/mypage/myquestion',function (req,res) {
-    res.render('myquestion');
-});
-router.get('/mypage/incorrect',function (req,res) {
-    res.render('myincorrect');
-});
 module.exports = router;

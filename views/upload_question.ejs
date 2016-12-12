@@ -30,16 +30,18 @@
 </header>
 <section>
     <h1>문제 올리기</h1>
-
+    <% if (msg != '') { %>
+        <div class="alert alert-danger"><%=msg%></div>
+    <%}%>
     <div>
         <div>
             <form class="create_question" action="/upload" method="post" enctype='multipart/form-data'>
-                <input type="text" placeholder="정답" name="answer"/></br>
-                <input type="text" placeholder="태그" name="category"/></br>
-                <input type="text" placeholder="시대" name="era"/></br>
-                <input type="text" placeholder="시험 날짜" name="date"/></br>
-                <input type="text" placeholder="점수" name="score"/></br>
-                <input type="file" style="margin: 0 auto; text-align: center;" name="uploadFile" accept="image/*"/></br>
+                <input type="text" placeholder="정답" name="answer"/><br>
+                <input type="text" placeholder="태그" name="category"/><br>
+                <input type="text" placeholder="시대" name="era"/><br>
+                <input type="text" placeholder="시험 날짜" name="date"/><br>
+                <input type="text" placeholder="점수" name="score"/><br>
+                <input type="file" style="margin: 0 auto; text-align: center;" name="uploadFile" accept="image/*"/><br>
                 <input type="submit" value="등록" style="width:100px; height:40px; color:white; background-color:#C3C3C3;">
             </form>
         </div>

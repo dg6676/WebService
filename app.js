@@ -5,6 +5,7 @@ var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 var session = require('express-session');
+var flash = require('connect-flash');
 
 var routes = require('./routes/index');
 var users = require('./routes/users');
@@ -16,7 +17,8 @@ var year = require('./routes/year');
 var category = require('./routes/category');
 var era = require('./routes/era');
 var recom = require('./routes/recommend');
-var temp_page=require('./routes/test');
+//var temp_page=require('./routes/test');
+
 var app = express();
 
 // view engine setup
@@ -37,6 +39,8 @@ app.use(session({
   saveUninitialized: true
 }));
 
+app.use(flash());
+
 app.use('/', routes);
 app.use('/users', users);
 app.use('/member', member);
@@ -47,8 +51,7 @@ app.use('/year', year);
 app.use('/category', category);
 app.use('/era', era);
 app.use('/recommend', recom);
-app.use('/temp',temp_page);
-
+//app.use('/temp',temp_page);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

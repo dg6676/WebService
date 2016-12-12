@@ -38,3 +38,19 @@ body {
 .q{
     color: #144866;
 }
+
+.alert {
+    margin:0 auto;
+    margin-bottom: 5px;
+    width:400px;
+    text-align:center;
+    padding: 15px;
+    border: 1px solid transparent;
+    border-radius: 4px;
+}
+
+.alert-danger {
+    color: #a94442;
+    background-color: #f2dede;
+    border-color: #ebccd1;
+}

@@ -60,6 +60,17 @@ exports.getUserInfo = function(uniq_id, pwd, callback){
     });
 }; // 특정 유저 정보 가져오는 함수.
 
+exports.IDcheck = function(uniq_id, callback){
+
+    User.findOne({userID: uniq_id}, function(err, us){
+        if(err) {
+            console.log(err);
+        } else {
+            callback(us);
+        }
+    });
+}; // 특정 유저 정보 가져오는 함수.
+
 exports.getAllUserInfo = function(callback){
 
     User.find().exec(function(err, user){
