@@ -257,3 +257,43 @@ exports.getList = function(list_name, callback){
        }
     });
 }; //category, era, date 이 3가지 중 하나 딱 저거 'category' 라고 넣어야 함. 넣으면 뭐 있는지 리스트 출력 함수.
+
+
+
+exports.deleteUserQuestion = function(user_id, q_id, callback){
+            UserQuestion.update({ userID: user_id }, { $pull: {questionList: {question: { qid: q_id }}} }, function(err, output){
+                if(err) console.log('database failure' );
+                if(!output.n) console.log('Question not found' );
+                callback(output);
+            });
+
+}; // 내 문제 목록에서 삭제 함수
+
+
+exports.updateUserInfo = function(user_id, pass, name, email, birth, gender , callback){
+            User.update({ userID: user_id }, {$set: {password:pass , name:name, email:email, birth_data: birth, gender:gender} }, function(err, output){
+                if(err) console.log('database failure' );
+                if(!output.n) console.log('User not found' );
+                callback(output);
+            });
+}; // 유저 데이터 변경 함수
+
+/*
+exports.deleteUserQuestion = function(user_id, q_id, callback){
+
+    UserQuestion.findOne({userID: user_id}, function(err, us){
+        if(err) {
+            console.log(err);
+        }
+        us._doc.questionList.remove({question: {qid: q_id}});
+        UserQuestion.save(function(err, us){
+           if(err){
+               console.log(err);
+           } else {
+               callback(us);
+           }
+        });
+
+    });
+};
+*/
